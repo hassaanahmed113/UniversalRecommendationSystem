@@ -1,4 +1,4 @@
-![UNIVERSAL RECOMMENDATION SYSTEM](https://github.com/hassaanahmed113/UniversalRecommendationSystem/assets/106430586/4234324c-1668-4fbd-851f-90226a878ce2)
+![UNIVERSAL RECOMMENDATION SYSTEM](https://github.com/hassaanahmed113/UniversalRecommendationSystem/assets/106430586/bc7bac6b-77b4-4a93-8db7-5fe7df2f327e)
 # FINAL YEAR PROJECT UNIVERSAL RECOMMENDATION SYSTEM
 
 ## GROUP MEMBER
