@@ -12,9 +12,11 @@ from io import BytesIO
 import os
 import boto3
 from botocore.client import Config
+
 app = Flask(__name__)
 
-
+import firebase_admin
+from firebase_admin import credentials, firestore
 import pyrebase
 import numpy as np
 import pickle
@@ -34,10 +36,24 @@ firebaseConfig = {
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
 storage = firebase.storage()
+cred = credentials.Certificate("fashion/universalrecommendationsys-firebase-adminsdk-8f5jp-57ba6ebc96.json")
+data = firebase_admin.initialize_app(cred)
 
-aws_keys = None
+store = firestore.client()
+doc_ref = store.collection(u'aws_keys').document(u'i1SBbCiQOeFccygCdT3A')
+
+try:
+    doc = doc_ref.get()
+    if doc.exists:
+        aws_keys = doc.to_dict()
+        print('AWS Keys:', aws_keys)
+    else:
+        print('AWS keys document not found')
+except Exception as e:
+    print('Error:', e)
 
 file_path = "embeddings.pkl"
+
 
 def load_embeddings_from_firebase_storage(file_path):
     url = storage.child(file_path).get_url(None)
@@ -58,7 +74,7 @@ model = tf.keras.Sequential([
     GlobalMaxPooling2D()
 ])
 
-def get_image_url_from_s3(image_name, aws_keys):
+def get_image_url_from_s3(image_name):
     AWS_ACCESS_KEY_ID = aws_keys["access_key"]
     AWS_SECRET_ACCESS_KEY = aws_keys["secret_key"]
     BUCKET_NAME = 'fashionuniversal'
