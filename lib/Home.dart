@@ -696,7 +696,7 @@ class _HomeState extends State<Home> {
   TextEditingController otpController = TextEditingController();
   final GlobalKey<FormState> _signupFormKey = GlobalKey<FormState>();
   List<String> gender = ['Male', 'Female'];
-  String genderSelected = '';
+  String genderSelected = 'Male';
   Future<void> _showSignupDialog() async {
     await showDialog(
       context: context,
